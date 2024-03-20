@@ -6,4 +6,4 @@ app = FastAPI()
 
 @app.post("/reservation", response_model=Reservation)
 async def create_reservation_form(reservation_form: ReservationCreate):
-  return ReservationForm(id=1, **reservation_form.dict())
+  return Reservation(id=1, **reservation_form.dict())
