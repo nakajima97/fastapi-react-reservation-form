@@ -12,3 +12,6 @@ class ReservationCreate(ReservationBase):
 
 class Reservation(ReservationBase):
     id: int
+
+    class Config:
+        from_attributes = True
