@@ -19,17 +19,21 @@ function App() {
           <Controller
             name="date"
             control={control}
-            render={({ field }) => <DatePicker {...field} />}
+            render={({ field }) => <DatePicker {...field} label="予約日時" />}
           />
         </Box>
         <Box>
-          <TextField {...register("name")} />
+          <TextField {...register("name")} label="名前" />
         </Box>
         <Box>
-          <TextField {...register("emailAddress")} />
+          <TextField
+            {...register("emailAddress")}
+            label="メールアドレス"
+            type="email"
+          />
         </Box>
         <Box>
-          <TextField {...register("phoneNumber")} />
+          <TextField {...register("phoneNumber")} label="電話番号" />
         </Box>
         <Button type="submit">Submit</Button>
       </LocalizationProvider>
