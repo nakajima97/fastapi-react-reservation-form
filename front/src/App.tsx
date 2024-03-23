@@ -5,37 +5,60 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ja";
 import * as dayjs from "dayjs";
 import { Controller, useForm } from "react-hook-form";
-import { Button, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 
 dayjs.locale("ja");
 
 function App() {
-  const { register, control } = useForm();
+  const { register, control, handleSubmit } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Box>
-          <Controller
-            name="date"
-            control={control}
-            render={({ field }) => <DatePicker {...field} label="予約日時" />}
-          />
-        </Box>
-        <Box>
-          <TextField {...register("name")} label="名前" />
-        </Box>
-        <Box>
-          <TextField
-            {...register("emailAddress")}
-            label="メールアドレス"
-            type="email"
-          />
-        </Box>
-        <Box>
-          <TextField {...register("phoneNumber")} label="電話番号" />
-        </Box>
-        <Button type="submit">Submit</Button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Controller
+                name="date"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    {...field}
+                    label="予約日時"
+                    sx={{ width: "100%" }}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField {...register("name")} label="名前" fullWidth />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                {...register("emailAddress")}
+                label="メールアドレス"
+                type="email"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                {...register("phoneNumber")}
+                label="電話番号"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button type="submit" fullWidth>
+                予約
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
       </LocalizationProvider>
     </>
   );
