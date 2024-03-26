@@ -26,7 +26,9 @@ function App() {
     console.log({ postData });
 
     const header = {
-      "Content-Type": "application/json",
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
 
     axios
