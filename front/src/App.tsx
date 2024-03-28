@@ -20,7 +20,7 @@ function App() {
       reservation_date: data.date.format("YYYY-MM-DD"),
       name: data.name,
       email_address: data.emailAddress,
-      phone_number: data.phoneNumber,
+      // phone_number: data.phoneNumber,
     };
     console.log({ postData });
 
@@ -34,7 +34,10 @@ function App() {
     axios
       .post("http://localhost:8000/reservation", postData, header)
       .then((res) => {
-        console.log(res);
+        console.log({ res });
+      })
+      .catch(() => {
+        window.alert("予約に失敗しました。時間をおいて再度お試しください。");
       });
   };
 
