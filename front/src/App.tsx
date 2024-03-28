@@ -55,12 +55,22 @@ function App() {
                     {...field}
                     label="予約日時"
                     sx={{ width: "100%" }}
+                    slotProps={{
+                      textField: {
+                        required: true,
+                      },
+                    }}
                   />
                 )}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField {...register("name")} label="名前" fullWidth />
+              <TextField
+                {...register("name")}
+                label="名前"
+                fullWidth
+                required
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -68,6 +78,7 @@ function App() {
                 label="メールアドレス"
                 type="email"
                 fullWidth
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -75,6 +86,7 @@ function App() {
                 {...register("phoneNumber")}
                 label="電話番号"
                 fullWidth
+                required
               />
             </Grid>
             <Grid item xs={12}>
