@@ -20,7 +20,7 @@ function App() {
       reservation_date: data.date.format("YYYY-MM-DD"),
       name: data.name,
       email_address: data.emailAddress,
-      // phone_number: data.phoneNumber,
+      phone_number: data.phoneNumber,
     };
     console.log({ postData });
 
