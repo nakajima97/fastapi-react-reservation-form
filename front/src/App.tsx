@@ -65,7 +65,6 @@ function App() {
                     sx={{ width: "100%" }}
                     slotProps={{
                       textField: {
-                        required: true,
                         error: errors.date ? true : false,
                         helperText: errors.date?.message as string,
                       },
