@@ -23,14 +23,12 @@ function App() {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
     const postData = {
       reservation_date: data.date.format("YYYY-MM-DD"),
       name: data.name,
       email_address: data.emailAddress,
       phone_number: data.phoneNumber,
     };
-    console.log({ postData });
 
     const header = {
       headers: {
