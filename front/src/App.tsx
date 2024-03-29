@@ -17,7 +17,10 @@ function App() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm({
+    defaultValues: { date: null, name: "", emailAddress: "", phoneNumber: "" },
+  });
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -38,8 +41,9 @@ function App() {
 
     axios
       .post("http://localhost:8000/reservation", postData, header)
-      .then((res) => {
-        console.log({ res });
+      .then(() => {
+        window.alert("予約が完了しました。");
+        reset();
       })
       .catch(() => {
         window.alert("予約に失敗しました。時間をおいて再度お試しください。");
@@ -67,9 +71,6 @@ function App() {
                         error: errors.date ? true : false,
                         helperText: errors.date?.message as string,
                       },
-                    }}
-                    onChange={(date) => {
-                      field.onChange(date);
                     }}
                   />
                 )}
