@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from source.schemas.reservation import ReservationCreate, Reservation
 from source.schemas.holiday import Holidays
 from source.db import get_db
-from source.crud.reservation import create_reservation
+from source.crud.reservation import create_reservation, fetch_reservations
 from source.crud.holiday import fetch_holidays
 
 app = FastAPI()
@@ -21,6 +21,10 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"],
 )
+
+@app.get("/reservations", response_model=list[Reservation])
+async def get_reservation(db: Session = Depends(get_db)):
+  return fetch_reservations(db)
 
 @app.post("/reservation", response_model=Reservation)
 async def create_reservation_form(reservation_form: ReservationCreate, db: Session = Depends(get_db)):
