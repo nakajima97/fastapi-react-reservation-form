@@ -12,6 +12,13 @@ dayjs.locale("ja");
 
 axios.defaults.withCredentials = true;
 
+type ReservationFormData = {
+  date: dayjs.Dayjs | null;
+  name: string;
+  emailAddress: string;
+  phoneNumber: string;
+};
+
 function App() {
   const {
     register,
@@ -31,9 +38,9 @@ function App() {
     });
   }, []);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ReservationFormData) => {
     const postData = {
-      reservation_date: data.date.format("YYYY-MM-DD"),
+      reservation_date: data.date?.format("YYYY-MM-DD"),
       name: data.name,
       email_address: data.emailAddress,
       phone_number: data.phoneNumber,
