@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ja";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
@@ -63,6 +63,7 @@ function App() {
                     {...field}
                     label="予約日時"
                     sx={{ width: "100%" }}
+                    minDate={dayjs().add(1, "day")}
                     slotProps={{
                       textField: {
                         error: errors.date ? true : false,
