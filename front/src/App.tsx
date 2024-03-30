@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 dayjs.locale("ja");
 
@@ -21,6 +22,14 @@ function App() {
   } = useForm({
     defaultValues: { date: null, name: "", emailAddress: "", phoneNumber: "" },
   });
+
+  const [holidays, setHolidays] = useState<string[]>([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/holidays").then((res) => {
+      setHolidays(res.data.holidays);
+    });
+  }, []);
 
   const onSubmit = (data: any) => {
     const postData = {
@@ -64,6 +73,9 @@ function App() {
                     label="予約日時"
                     sx={{ width: "100%" }}
                     minDate={dayjs().add(1, "day")}
+                    shouldDisableDate={(date) =>
+                      holidays.includes(date.format("YYYY-MM-DD"))
+                    }
                     slotProps={{
                       textField: {
                         error: errors.date ? true : false,
