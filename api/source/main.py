@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from source.schemas.reservation import ReservationCreate, Reservation
 from source.schemas.holiday import Holidays
+from source.schemas.calendar import Calendars
 from source.db import get_db
 from source.crud.reservation import create_reservation, fetch_reservations
 from source.crud.holiday import fetch_holidays
@@ -33,3 +34,7 @@ async def create_reservation_form(reservation_form: ReservationCreate, db: Sessi
 @app.get("/holidays", response_model=Holidays)
 async def get_holidays(db: Session = Depends(get_db)):
   return fetch_holidays(db)
+
+@app.post("/calendars", response_model=Calendars)
+async def create_calendars():
+  return {"calendars": ["2024-01-01", "2024-01-02"]}
