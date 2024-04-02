@@ -9,3 +9,6 @@ def create_calendars_in_db(db: Session, calendars: calendar_schema.CalendarsCrea
     db.commit()
     db.refresh(insert_calendar)
     return {"calendars": insert_calendar}
+
+def find_calendars_by_date(db: Session, date: str):
+    return db.query(calendars_model.Calendars).filter(calendars_model.Calendars.date == date).first()
