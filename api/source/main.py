@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from typing import List
 
 from source.schemas.reservation import ReservationCreate, Reservation
 from source.schemas.holiday import Holidays
@@ -42,3 +43,7 @@ async def create_calendars(calendars: CalendarsCreate, db: Session = Depends(get
     return {"message": "Calendar already exists."}
   result = create_calendars_in_db(db, calendars)
   return result
+
+@app.get("/calendars", response_model=List[Calendars])
+async def get_calendars(db: Session = Depends(get_db)):
+  return [{'date': '2024-01-01', 'id': 1, 'is_holiday': False}, {'date': '2024-01-02', 'id': 1, 'is_holiday': True}]
