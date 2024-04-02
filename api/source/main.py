@@ -8,7 +8,7 @@ from source.schemas.calendar import CalendarsCreate, Calendars
 from source.db import get_db
 from source.crud.reservation import create_reservation, fetch_reservations
 from source.crud.holiday import fetch_holidays
-from source.crud.calendar import create_calendars_in_db
+from source.crud.calendar import create_calendars_in_db, find_calendars_by_date
 
 app = FastAPI()
 
@@ -38,5 +38,7 @@ async def get_holidays(db: Session = Depends(get_db)):
 
 @app.post("/calendars")
 async def create_calendars(calendars: CalendarsCreate, db: Session = Depends(get_db)):
+  if (find_calendars_by_date(db, calendars.date)):
+    return {"message": "Calendar already exists."}
   result = create_calendars_in_db(db, calendars)
   return result
