@@ -9,7 +9,7 @@ from source.schemas.calendar import CalendarsCreate, Calendars
 from source.db import get_db
 from source.crud.reservation import create_reservation, fetch_reservations
 from source.crud.holiday import fetch_holidays
-from source.crud.calendar import create_calendars_in_db, find_calendars_by_date
+from source.crud.calendar import create_calendars_in_db, find_calendars_by_date, fetch_calendars
 
 app = FastAPI()
 
@@ -46,4 +46,4 @@ async def create_calendars(calendars: CalendarsCreate, db: Session = Depends(get
 
 @app.get("/calendars", response_model=List[Calendars])
 async def get_calendars(db: Session = Depends(get_db)):
-  return [{'date': '2024-01-01', 'id': 1, 'is_holiday': False}, {'date': '2024-01-02', 'id': 1, 'is_holiday': True}]
+  return fetch_calendars(db)

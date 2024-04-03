@@ -12,3 +12,6 @@ def create_calendars_in_db(db: Session, calendars: calendar_schema.CalendarsCrea
 
 def find_calendars_by_date(db: Session, date: str):
     return db.query(calendars_model.Calendars).filter(calendars_model.Calendars.date == date).first()
+
+def fetch_calendars(db: Session):
+    return db.query(calendars_model.Calendars).all()
