@@ -51,3 +51,7 @@ async def get_calendars(db: Session = Depends(get_db)):
 @app.post("/holidays", response_model=Holidays)
 async def create_holidays(holidays: Holidays, db: Session = Depends(get_db)):
   return store_holidays(db, holidays)
+
+@app.delete("/holidays", response_model=Holidays)
+async def delete_holidays(holidays: Holidays, db: Session = Depends(get_db)):
+  return {"holidays": ["2024-01-01", "2024-01-02"]}
