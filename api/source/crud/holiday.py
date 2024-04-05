@@ -16,3 +16,12 @@ def store_holidays(db: Session, holidays: holiday_schema.Holidays):
         calendar.is_holiday = True
     db.commit()
     return holidays
+
+def delete_holidays(db: Session, holidays: holiday_schema.Holidays):
+    for holiday in holidays.holidays:
+        calendar = db.query(calendars_model.Calendars).filter(calendars_model.Calendars.date == holiday).first()
+        if not calendar:
+            continue
+        calendar.is_holiday = False
+    db.commit()
+    return holidays

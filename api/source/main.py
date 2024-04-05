@@ -8,7 +8,7 @@ from source.schemas.holiday import Holidays
 from source.schemas.calendar import CalendarsCreate, Calendars
 from source.db import get_db
 from source.crud.reservation import create_reservation, fetch_reservations
-from source.crud.holiday import fetch_holidays, store_holidays
+from source.crud.holiday import fetch_holidays, store_holidays, delete_holidays
 from source.crud.calendar import create_calendars_in_db, find_calendars_by_date, fetch_calendars
 
 app = FastAPI()
@@ -52,6 +52,6 @@ async def get_calendars(db: Session = Depends(get_db)):
 async def create_holidays(holidays: Holidays, db: Session = Depends(get_db)):
   return store_holidays(db, holidays)
 
-@app.delete("/holidays", response_model=Holidays)
-async def delete_holidays(holidays: Holidays, db: Session = Depends(get_db)):
-  return {"holidays": ["2024-01-01", "2024-01-02"]}
+@app.delete("/holidays")
+async def delete_holidays_controller(holidays: Holidays, db: Session = Depends(get_db)):
+  return delete_holidays(db, holidays)
