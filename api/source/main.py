@@ -47,3 +47,7 @@ async def create_calendars(calendars: CalendarsCreate, db: Session = Depends(get
 @app.get("/calendars", response_model=List[Calendars])
 async def get_calendars(db: Session = Depends(get_db)):
   return fetch_calendars(db)
+
+@app.post("/holidays", response_model=Holidays)
+async def create_holidays():
+  return {"holidays": ["2024-01-01"]}
