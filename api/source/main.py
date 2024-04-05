@@ -8,7 +8,7 @@ from source.schemas.holiday import Holidays
 from source.schemas.calendar import CalendarsCreate, Calendars
 from source.db import get_db
 from source.crud.reservation import create_reservation, fetch_reservations
-from source.crud.holiday import fetch_holidays
+from source.crud.holiday import fetch_holidays, store_holidays
 from source.crud.calendar import create_calendars_in_db, find_calendars_by_date, fetch_calendars
 
 app = FastAPI()
@@ -49,5 +49,5 @@ async def get_calendars(db: Session = Depends(get_db)):
   return fetch_calendars(db)
 
 @app.post("/holidays", response_model=Holidays)
-async def create_holidays():
-  return {"holidays": ["2024-01-01"]}
+async def create_holidays(holidays: Holidays, db: Session = Depends(get_db)):
+  return store_holidays(db, holidays)
