@@ -79,6 +79,7 @@ function App() {
                     label="予約日時"
                     sx={{ width: "100%" }}
                     minDate={dayjs().add(1, "day")}
+                    format="YYYY/MM/DD"
                     shouldDisableDate={(date) =>
                       holidays.includes(date.format("YYYY-MM-DD"))
                     }
