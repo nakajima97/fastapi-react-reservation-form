@@ -4,11 +4,13 @@ import source.models.calendars as calendars_model
 import source.schemas.calendar as calendar_schema
 
 def create_calendars_in_db(db: Session, calendars: calendar_schema.CalendarsCreate):
-    insert_calendar = calendars_model.Calendars(**calendars.dict());
-    db.add(insert_calendar);
+    for date in calendars.dates:
+        if(db.query(calendars_model.Calendars).filter(calendars_model.Calendars.date == date).first()):
+            continue
+        db_calendar = calendars_model.Calendars(date=date, is_holiday=False)
+        db.add(db_calendar)
     db.commit()
-    db.refresh(insert_calendar)
-    return {"calendars": insert_calendar}
+    return {"message": "Calendars created successfully."}
 
 def find_calendars_by_date(db: Session, date: str):
     return db.query(calendars_model.Calendars).filter(calendars_model.Calendars.date == date).first()

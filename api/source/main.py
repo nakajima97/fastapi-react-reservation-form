@@ -39,8 +39,6 @@ async def get_holidays(db: Session = Depends(get_db)):
 
 @app.post("/calendars")
 async def create_calendars(calendars: CalendarsCreate, db: Session = Depends(get_db)):
-  if (find_calendars_by_date(db, calendars.date)):
-    return {"message": "Calendar already exists."}
   result = create_calendars_in_db(db, calendars)
   return result
 

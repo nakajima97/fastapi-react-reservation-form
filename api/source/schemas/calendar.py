@@ -5,8 +5,8 @@ import datetime
 class CalendarsBase(BaseModel):
   date: datetime.date = Field(example="2024-01-01", description="日付")
 
-class CalendarsCreate(CalendarsBase):
-  date: List[CalendarsBase] = Field(example="2024-01-01", description="日付")
+class CalendarsCreate(BaseModel):
+  dates: List[datetime.date] = Field(example=["2024-01-01", "2024-01-02"], description="日付")
 
 class Calendars(CalendarsBase):
   id: int
