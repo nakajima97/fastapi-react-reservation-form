@@ -29,7 +29,7 @@ app.add_middleware(
 async def get_reservation(db: Session = Depends(get_db)):
   return fetch_reservations(db)
 
-@app.post("/reservation", response_model=Reservation)
+@app.post("/reservations", response_model=Reservation)
 async def create_reservation_form(reservation_form: ReservationCreate, db: Session = Depends(get_db)):
   return create_reservation(db, reservation_form)
 

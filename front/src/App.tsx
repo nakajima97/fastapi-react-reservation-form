@@ -53,7 +53,7 @@ function App() {
     };
 
     axios
-      .post("http://localhost:8000/reservation", postData, header)
+      .post("http://localhost:8000/reservations", postData, header)
       .then(() => {
         window.alert("予約が完了しました。");
         reset();
