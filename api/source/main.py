@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 
+import datetime
+
 from source.schemas.reservation import ReservationCreate, Reservation
 from source.schemas.holiday import Holidays
 from source.schemas.calendar import CalendarsCreate, Calendars
@@ -33,9 +35,9 @@ async def get_reservation(db: Session = Depends(get_db)):
 async def create_reservation_form(reservation_form: ReservationCreate, db: Session = Depends(get_db)):
   return create_reservation(db, reservation_form)
 
-@app.get("/holidays", response_model=Holidays)
-async def get_holidays(db: Session = Depends(get_db)):
-  return fetch_holidays(db)
+@app.get("/holidays")
+async def get_holidays(start_date: datetime.date | None = None, end_date: datetime.date | None = None, db: Session = Depends(get_db)):
+  return fetch_holidays(db, start_date, end_date)
 
 @app.post("/calendars")
 async def create_calendars(calendars: CalendarsCreate, db: Session = Depends(get_db)):
