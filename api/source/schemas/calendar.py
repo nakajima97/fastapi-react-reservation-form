@@ -6,7 +6,7 @@ class CalendarsBase(BaseModel):
   date: datetime.date = Field(example="2024-01-01", description="日付")
 
 class CalendarsCreate(CalendarsBase):
-  pass
+  date: List[CalendarsBase] = Field(example="2024-01-01", description="日付")
 
 class Calendars(CalendarsBase):
   id: int
