@@ -16,6 +16,6 @@ def create_calendars_in_db(db: Session, calendars: calendar_schema.CalendarsCrea
 def find_calendars_by_date(db: Session, date: str):
     return db.query(calendars_model.Calendars).filter(calendars_model.Calendars.date == date).first()
 
-async def fetch_calendars(db: Session):
+def fetch_calendars(db: Session):
     result = db.execute(select(calendars_model.Calendars.id, calendars_model.Calendars.date, calendars_model.Calendars.is_holiday))
     return result.all()
