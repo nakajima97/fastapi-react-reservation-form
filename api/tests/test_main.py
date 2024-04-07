@@ -32,7 +32,7 @@ async def async_client() -> AsyncClient:
   async with AsyncClient(app=app, base_url="http://test") as client:
     yield client
 
-@pytenst.mark.asyncio
+@pytest.mark.asyncio
 async def test_get_calendars(async_client: AsyncClient):
   response = await async_client.get("/calendars")
   assert response.status_code == starlette.status.HTTP_200_OK
