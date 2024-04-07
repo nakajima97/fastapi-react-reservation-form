@@ -5,3 +5,7 @@
 
 マイグレーションの実行  
 `docker compose exec api poetry run python -m source.migrate_db`  
+
+# テストコードの実行
+## api
+`docker compose run --entrypoint "poetry run pytest" api`
