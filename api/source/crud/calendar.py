@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import select
 
 import source.models.calendars as calendars_model
 import source.schemas.calendar as calendar_schema
@@ -16,4 +17,5 @@ def find_calendars_by_date(db: Session, date: str):
     return db.query(calendars_model.Calendars).filter(calendars_model.Calendars.date == date).first()
 
 def fetch_calendars(db: Session):
-    return db.query(calendars_model.Calendars).all()
+    result = db.execute(select(calendars_model.Calendars.id, calendars_model.Calendars.date, calendars_model.Calendars.is_holiday))
+    return result.all()
