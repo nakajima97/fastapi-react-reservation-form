@@ -2,6 +2,7 @@ import pytest
 import pytest_asyncio
 import starlette.testclient
 
+from fastapi.testclient import TestClient
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
@@ -32,7 +33,10 @@ async def async_client() -> AsyncClient:
   async with AsyncClient(app=app, base_url="http://test") as client:
     yield client
 
-@pytest.mark.asyncio
-async def test_get_calendars(async_client: AsyncClient):
-  response = await async_client.get("/calendars")
+@pytest.fixture
+def client() -> TestClient:
+  return TestClient(app)
+
+def test_get_calendars(client: TestClient):
+  response = client.get("/calendars")
   assert response.status_code == starlette.status.HTTP_200_OK
