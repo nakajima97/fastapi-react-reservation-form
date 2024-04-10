@@ -1,3 +1,8 @@
+# v2への移行
+テストコードとかエンドポイントとかを整理するためにゼロから開発しなおすことにした  
+version2として以下リポジトリを作成
+https://github.com/nakajima97/fastapi-react-reservation-form-v2
+
 # fastapi-react-reservation-form
 ## Clone後に実行するコマンド
 `docker compose up`  
